@@ -17,9 +17,7 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.conf import settings
 
-from users.views import LoginView
-
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^users/', include('users.urls')),
 ]
