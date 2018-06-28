@@ -36,7 +36,7 @@
         <div class="login-box-body">
             <p class="login-box-msg">Login</p>
 
-            <form action="{% url 'login' %}" method="post">
+            <form action="{% url 'user_login' %}" method="post">
                 <div class="form-group has-feedback {% if login_form.errors.username %} has-error {% endif %}">
                     <input type="text" name="username" class="form-control" placeholder="username: more than 6 characters or numbers">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -58,7 +58,7 @@
                 </div>
             </form>
 
-        
+            <a href="{% url 'user_register' %}" class="pull-right">注册新账号</a>
             <a href="/forget_password">forget password？</a><br>
         </div>
         <!-- login-box-body-ends -->

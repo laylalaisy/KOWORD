@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import LoginView
+from .views import LoginView, RegisterView
 
 urlpatterns = [
-    url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^login/$', LoginView.as_view(), name='user_login'),
+    url(r'^register/$', RegisterView.as_view(), name='user_register'),
 ]
