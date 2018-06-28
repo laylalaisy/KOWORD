@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
-from . import forms
-from . import models
+from .forms import LoginForm
+from .models import UserProfile
 
 class CustomBackend(ModelBackend):
 
@@ -26,7 +26,7 @@ class LoginView(View):
         return render(request, "login.html", {})
 
     def post(self, request):
-    	login_form = LoginFrom(request.POST)	# test if input is valid
+    	login_form = LoginForm(request.POST)	# test if input is valid
     	if login_form.is_valid():				# input is valid, then get login inpu 
     		username_ = request.POST.get("username", "")
     		password_ = request.POST.get("password", "")
