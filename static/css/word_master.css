@@ -1,0 +1,135 @@
+.captcha1 > img{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 2;
+    height: 36px;
+}
+
+.captcha1 {
+    position: relative;
+}
+
+.captcha1 > input {
+    padding-right: 85px;
+    height: 40px;
+}
+
+.selected {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.tree, .tree ul {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+.tree ul {
+    margin-left:1em;
+    position:relative
+}
+.tree ul ul {
+    margin-left:.5em
+}
+.tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px solid
+}
+.tree li {
+    margin:0;
+    padding:0 1em;
+    line-height:2em;
+    color:#369;
+    font-weight:700;
+    position:relative
+}
+.tree ul li:before {
+    content:"";
+    display:block;
+    width:10px;
+    height:0;
+    border-top:1px solid;
+    margin-top:-1px;
+    position:absolute;
+    top:1em;
+    left:0
+}
+.tree ul li:last-child:before {
+    background:#ecf0f5;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+.indicator {
+    margin-right:5px;
+}
+.tree li a {
+    text-decoration: none;
+    color:#369;
+}
+.tree li button, .tree li button:active, .tree li button:focus {
+    text-decoration: none;
+    color:#369;
+    border:none;
+    background:transparent;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    outline: 0;
+}
+
+.pronounciation_list {
+    background: #f7f7f7;
+}
+
+.word_symbol,
+.pronounciation_list,
+.word_sentenses {
+    background: #f7f7f7;
+}
+
+.word_symbol .word_part,
+.pronounciation_list .pronounciation,
+.word_sentenses .word_sentense {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.word_symbol .word_part:before,
+.word_symbol .word_part:after,
+.pronounciation_list .pronounciation:before,
+.pronounciation_list .pronounciation:after,
+.word_sentenses .word_sentense:before,
+.word_sentenses .word_sentense:after{
+  content: " ";
+  display: table;
+}
+
+.word_part ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.word_part ul li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.word_sentenses .word_sent_orig,
+.word_part .word_property {
+    color: #7d7d7d;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-bar {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
