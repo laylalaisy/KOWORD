@@ -1,0 +1,54 @@
+<!-- Main Header -->
+<header class="main-header">
+
+    <!-- Logo -->
+    <a class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>KOWORD</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>KOWORD</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">切换导航栏</span>
+        </a>
+        {% if request.user.is_authenticated %}
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- User Account Menu -->
+                <li class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- The user image in the navbar-->
+                        <img src="{{ request.user.avatar_url }}" class="user-image avatar" alt="User Image">
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <span class="hidden-xs nickname">{{ request.user }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- The user image in the menu -->
+                        <li class="user-header">
+                            <p>
+                                <span class="nickname">{{ request.user }}</span>
+                            </p>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="{% url 'users.profile' %}" class="btn btn-default btn-flat">我的账号</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="{% url 'user_logout' %}" class="btn btn-default btn-flat">退出系统</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        {% endif %}
+    </nav>
+</header>

@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import LoginView, RegisterView
+from .views import LoginView, RegisterView, IndexView
 
 urlpatterns = [
-    
+    url(r'^index/$', IndexView.as_view(), name='user_index'),
 ]

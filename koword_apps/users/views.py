@@ -46,7 +46,7 @@ class LoginView(View):
     		user = authenticate(username=username, password=password)	
     		if user is not None:				# user is valid
     			login(request, user)	
-    			return render(request, "user_login.html", {
+    			return render(request, "user_index.html", {
                     "msg": "success to login!"
                 })	# success to login
     		else:
@@ -102,3 +102,9 @@ class RegisterView(View):
                 "msg": "Fail to register!"
             })
 
+class IndexView(View):
+    def get(self, request):
+        #registerform = RegisterForm()
+        return render(request, "user_index.html", {
+            #'registerform':registerform,
+        })
