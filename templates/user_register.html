@@ -32,28 +32,33 @@
             <p class="login-box-msg">Register</p>
             <div class="nav-tabs-custom">
                 <div class="tab-content">
-                    <div class="tab-pane {% ifequal method 'email' %}active{% endifequal %}" id="register_mail">
+                    <div class="tab-pane active" id="register_mail">
                         <form method="post">
-                            {{register_form.errors.nickname}}
-                            <div class="form-group has-feedback {% if register_form.errors.nickname %} has-error {% endif %}">
-                                <input type="text" name="nickname" value="{{register_form.data.nickname}}" class="form-control" placeholder="用户昵称">
+                            
+                            <div class="form-group has-feedback {% if registerform.errors.username %} has-error {% endif %}">
+                                <input type="text" name="username" value="{{registerform.data.username}}" class="form-control" placeholder="username: more than 6 characters or numbers">
                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                             </div>
-                            {{register_form.errors.email}}
-                            <div class="form-group has-feedback {% if register_form.errors.email %} has-error {% endif %}">
-                                <input type="email" name="email" value="{{register_form.data.email}}" class="form-control" placeholder="电子邮件">
+                            {{registerform.errors.username}}
+                            
+                            <div class="form-group has-feedback {% if registerform.errors.email %} has-error {% endif %}">
+                                <input type="email" name="email" value="{{register_form.data.email}}" class="form-control" placeholder="email">
                                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                             </div>
-                            {{register_form.errors.password}}
-                            <div class="form-group has-feedback {% if register_form.errors.password %} has-error {% endif %}">
-                                <input type="password" name="password" class="form-control" placeholder="密码">
+                            {{registerform.errors.email}}
+                            
+                            <div class="form-group has-feedback {% if registerform.errors.password %} has-error {% endif %}">
+                                <input type="password" name="password" class="form-control" placeholder="password: more than 6 characters or numbers">
                                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                             </div>
-                            {{register_form.errors.password_confirm}}
-                            <div class="form-group has-feedback {% if register_form.errors.password_confirm %} has-error {% endif %}">
-                                <input type="password" name="password_confirm" class="form-control" placeholder="确认密码">
+                            {{registerform.errors.password}}
+                            
+                            <div class="form-group has-feedback {% if registerform.errors.password_confirm %} has-error {% endif %}">
+                                <input type="password" name="password_confirm" class="form-control" placeholder="confirm password">
                                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                             </div>
+                            {{registerform.errors.password_confirm}}
+
                             {% csrf_token %}
                             <div class="row">
                                 <!-- /.col -->
@@ -61,7 +66,7 @@
                                     {% if msg %}
                                         <div class="bg-red alert">{{ msg }}</div>
                                     {% endif %}
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -69,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{% url 'user_login' %}" class="text-center">已有账户？马上登录</a>
+            <a href="{% url 'user_login' %}" class="text-center">Already have account?Login now</a>
         </div>
         <!-- /.form-box -->
     </div>

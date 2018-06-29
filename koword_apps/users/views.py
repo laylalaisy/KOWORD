@@ -46,27 +46,31 @@ class LoginView(View):
     		user = authenticate(username=username, password=password)	
     		if user is not None:				# user is valid
     			login(request, user)	
-    			return render(request, "user_login.html", {"msg": "success to login!"})	# success to login
+    			return render(request, "user_login.html", {
+                    "msg": "success to login!"
+                })	# success to login
     		else:
-    			return render(request, "user_login.html", {"msg": "Username or password is wrong!"})	# fail to login
+    			return render(request, "user_login.html", {  # fail to login
+                    'loginform': loginform,
+                    "msg": "Username or password is wrong!"
+                })	
     	else:
-            return render(request, "user_login.html", {"msg": "Username or password should be longer than 6 characters or numbers!"}) # input is not valid
+            return render(request, "user_login.html", { # input is not valid
+                'loginform': loginform
+            }) 
 
 
 class RegisterView(View):
-    """
-    用户注册
-    """
     def get(self, request):
-        register_form = RegisterForm()
+        registerform = RegisterForm()
         return render(request, "user_register.html", {
-            'register_form':register_form,
+            'registerform':registerform,
             'method': 'email'
         })
 
     def post(self, request):
-        register_form = RegisterForm(request.POST)
-        if register_form.is_valid():
+        registerform = RegisterForm(request.POST)
+        if registerform.is_valid():
             user_name = request.POST.get("email", "")
             if UserProfile.objects.filter(email=user_name):
                 return render(request, "user_register.html", {

@@ -7,7 +7,6 @@ from django.contrib.auth.models import AbstractUser
 from django.templatetags.static import static
 
 class UserProfile(AbstractUser):
-
     class Meta:
         verbose_name = "UserProfile"
         verbose_name_plural = verbose_name
@@ -16,7 +15,5 @@ class UserProfile(AbstractUser):
         return self.__unicode__()
 
     def __unicode__(self):
-        if self.nick_name:
-            return self.nick_name
         return self.username
 
