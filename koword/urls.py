@@ -17,6 +17,10 @@ from django.conf.urls import url
 from django.conf.urls import include
 from django.conf import settings
 
+from users.views import LoginView, RegisterView
+
 urlpatterns = [
+    url(r'^login/$', LoginView.as_view(), name='user_login'),
+    url(r'^register/$', RegisterView.as_view(), name='user_register'),
     url(r'^users/', include('users.urls')),
 ]

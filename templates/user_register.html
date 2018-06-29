@@ -29,16 +29,10 @@
         </div>
 
         <div class="register-box-body">
-            <p class="login-box-msg">注册新账户</p>
+            <p class="login-box-msg">Register</p>
             <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="{% ifequal method 'email' %}active{% endifequal %}">
-                        <a href="#register_mail" data-toggle="tab">邮箱注册</a>
-                    </li>
-                </ul>
                 <div class="tab-content">
                     <div class="tab-pane {% ifequal method 'email' %}active{% endifequal %}" id="register_mail">
-
                         <form method="post">
                             {{register_form.errors.nickname}}
                             <div class="form-group has-feedback {% if register_form.errors.nickname %} has-error {% endif %}">
