@@ -40,11 +40,11 @@
 
             <form action="{% url 'user_login' %}" method="post">
                 <div class="form-group has-feedback {% if loginform.errors.username %} has-error {% endif %}">
-                    <input type="text" name="username" class="form-control" placeholder="username">
+                    <input type="text" name="username" class="form-control" placeholder="username or email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 {{loginform.errors.username}}
-                
+
                 <div class="form-group has-feedback {% if loginform.errors.password %} has-error {% endif %}">
                     <input type="password" name="password" class="form-control" placeholder="password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>

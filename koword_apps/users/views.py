@@ -28,7 +28,7 @@ class CustomBackend(ModelBackend):
 	def authenticate(self, username=None, password=None, **kwargs):
 		try:
 		  user = UserProfile.objects.get(Q(username=username)|Q(email=username))
-		  if user.check_password(password): 	# password stored in backend is encrypted
+		  if user.check_password(password): # password stored in backend is encrypted
 		      return user 					# success to login
 		except Exception as e:
 			 return None							# fail to login
@@ -65,33 +65,40 @@ class RegisterView(View):
         registerform = RegisterForm()
         return render(request, "user_register.html", {
             'registerform':registerform,
-            'method': 'email'
         })
 
     def post(self, request):
         registerform = RegisterForm(request.POST)
+
         if registerform.is_valid():
-            user_name = request.POST.get("email", "")
-            if UserProfile.objects.filter(email=user_name):
+            username = request.POST.get("username", "")
+            if UserProfile.objects.filter(username=username):   # test if username is already exist
                 return render(request, "user_register.html", {
-                    "register_form":register_form,
-                    "msg":"用户{0}已经存在".format(user_name),
-                    "method": "email"
+                    "registerform":registerform,
+                    "msg":"{0} is used. Please change another username!".format(username),
                 })
-            pass_word = request.POST.get("password", "")
+            email = request.POST.get("email", "") 
+            if UserProfile.objects.filter(email=email):   # test if email is already exist
+                return render(request, "user_register.html", {
+                    "registerform":registerform,
+                    "msg":"{0} is used. Please change another email!".format(email),
+                })
+            password = request.POST.get("password", "")
+
             user_profile = UserProfile()
-            user_profile.nick_name = register_form.data["nickname"]
-            user_profile.username = user_name
-            user_profile.email = user_name
-            user_profile.is_active = False
-            user_profile.password = make_password(pass_word)
+            user_profile.username = username
+            user_profile.email = email
+            user_profile.password = make_password(password)
+            user_profile.is_active = True
             user_profile.save()
 
-            send_register_email_async.delay(user_name, "register", request.get_host())
-            return render(request, "user_login.html", {"login_title": u"注册成功，请检查你的邮箱中的确认邮件。账号激活之后就可以登录了。"})
+            return render(request, "user_login.html", {
+                "registerform": registerform,
+                "msg": "Success to register! Please login now."
+            })
         else:
             return render(request, "user_register.html", {
-                "register_form": register_form,
-                "method": "email"
+                "registerform": registerform,
+                "msg": "Fail to register!"
             })
 
