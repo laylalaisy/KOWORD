@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'koword',
     'users',
     'books',
+    'learn',
 ]
 
 MIDDLEWARE_CLASSES = [

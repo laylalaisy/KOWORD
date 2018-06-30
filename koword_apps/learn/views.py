@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+import json
+
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.views.generic import View
+from django.conf import settings
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
+
+class LearnListView(View):
+    def get(self, request):
+
+    	return render(request, "learn_list.html", {
+    	})
