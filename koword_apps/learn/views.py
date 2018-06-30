@@ -9,7 +9,12 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http40
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
+from books.models import List
+
 class LearnListView(View):
     def get(self, request):
+    	books = List.objects.all()
+
     	return render(request, "learn_list.html", {
+    		"books": books
     	})
