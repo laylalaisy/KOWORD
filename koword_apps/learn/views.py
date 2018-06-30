@@ -49,7 +49,7 @@ class LearnFinishView(View):
 	def get(self, request, book_id, word_unit, user_id):
 
 		learn_record = Record()
-		learn_record.isfinished = 1
+		learn_record.islearned = 1
 		learn_record.userid = user_id
 		learn_record.bookid = book_id
 		learn_record.unit = word_unit

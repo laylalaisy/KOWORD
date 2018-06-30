@@ -49,6 +49,13 @@ class ReviewWordListView(View):
 class ReviewFinishView(View):
 	def get(self, request, book_id, word_unit, user_id):
 
+		review_record = Record()
+		review_record.isreviewed = 1
+		review_record.userid = user_id
+		review_record.bookid = book_id
+		review_record.unit = word_unit
+		review_record.save()
+
 		books = List.objects.all()
 
 		return render(request, "review_list.html", {
