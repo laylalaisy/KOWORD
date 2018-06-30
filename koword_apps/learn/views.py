@@ -60,3 +60,9 @@ class LearnFinishView(View):
 		return render(request, "learn_list.html", {
 			"books": books
 		})
+
+
+class LearnRecordView(View):
+    def get(self, request):
+    	return render(request, "learn_records.html", {
+    	})
