@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'koword',
     'users',
+    'books',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -14,8 +14,28 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
-        <ul id="book-tree"></ul>
+        <table class="table table-responsive" id="wordbook_table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Units</th>
+                <th>Author</th>
+                <th>Information</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.unit }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.info }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </section>
 
 {% endblock %}
+
 
