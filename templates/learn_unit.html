@@ -24,10 +24,11 @@
             </tr>
             </thead>
             <tbody>
-                <% for int i = 1; i < 7; i++ %>
+                {% for word in words %}
                     <tr>
-                        <td>i</td>
+                        <td>{{ word.word }}</td> 
                     </tr>
+                {% endfor %}
             </tbody>
         </table>
     </section>

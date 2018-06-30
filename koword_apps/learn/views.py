@@ -22,8 +22,10 @@ class LearnBookListView(View):
 
 
 class LearnUnitListView(View):
-	def get(self, request, book_id):		
-		return render(request, 'learn_unit.html', {})
+	def get(self, request, book_id):
+		bookname = List.objects.filter(id=book_id).values("name")
+		words = Word.objects.filter(bookname=bookname)
 
-
-
+		return render(request, 'learn_unit.html', {
+			"words": words
+		})
