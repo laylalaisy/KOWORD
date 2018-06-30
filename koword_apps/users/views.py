@@ -13,14 +13,13 @@ from .forms import LoginForm, RegisterForm
 from .models import UserProfile
 
 
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from django.conf import settings
 
