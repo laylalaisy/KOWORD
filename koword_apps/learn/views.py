@@ -11,6 +11,5 @@ from django.core.urlresolvers import reverse
 
 class LearnListView(View):
     def get(self, request):
-
     	return render(request, "learn_list.html", {
     	})
