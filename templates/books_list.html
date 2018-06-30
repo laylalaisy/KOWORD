@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'datatables/dataTables.bootstrap.min.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1> WORD</h1>
+    <section class="content-header">
+        <h1>
+            Books
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <ul id="book-tree"></ul>
+    </section>
+
 {% endblock %}
+
