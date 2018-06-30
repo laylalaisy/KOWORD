@@ -8,6 +8,7 @@ from django.db.models import Q
 from users.models import UserProfile
 
 class List(models.Model):
+    id = models.IntegerField(verbose_name='id', primary_key=True)
     name = models.CharField(blank=True, max_length=200, verbose_name="name")
     unit = models.IntegerField(verbose_name='unit')
     author = models.CharField(blank=True, max_length=200, verbose_name="author")

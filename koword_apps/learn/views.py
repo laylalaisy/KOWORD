@@ -19,12 +19,8 @@ class LearnBookListView(View):
     		"books": books
     	})
 
-class LearnUnitListView(View):
-	def get(self, request, book_id):
-		book_name = List.objects.filter(id=int(book_id)).get()
 
-		
-		return render(request, 'learn_list.html', {
-			"book_name": book_name
-		})
+class LearnUnitListView(View):
+	def get(self, request, book_id):		
+		return render(request, 'user_login.html', {})
 

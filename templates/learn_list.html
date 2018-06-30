@@ -27,7 +27,7 @@
                 {% for book in books %}
                     <tr>
                         <td>{{ book.name }}</td>
-                        <td><a class="btn btn-primary" href="{% url 'learn_unitlist' book.id %}">{{info}}</a></td> 
+                        <td><a class="btn btn-primary" href="{% url 'learn_unitlist' book.id %}">Learn Now</a></td> 
                     </tr>
                 {% endfor %}
             </tbody>

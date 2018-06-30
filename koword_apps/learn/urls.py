@@ -19,5 +19,5 @@ from .views import LearnBookListView, LearnUnitListView
 
 urlpatterns = [
     url(r'^booklist/$', LearnBookListView.as_view(), name='learn_booklist'),
-    url(r'^booklist/(?P<book_id>\d+)$', LearnUnitListView.as_view(), name='learn_unitlist')
+    url(r'^unitlist/(?P<book_id>\d+)$', LearnUnitListView.as_view(), name='learn_unitlist')
 ]
