@@ -45,6 +45,13 @@ class LearnWordListView(View):
 			"words": words
 		})
 
-class LearnWordView(View):
+class LearnFinishView(View):
 	def get(self, request, book_id, word_unit, user_id):
-		return render(request, 'user_login.html', {})
+		books = List.objects.filter(id=book_id)
+		bookname = List.objects.filter(id=book_id).values("name")
+		words = Word.objects.filter(bookname=bookname).values("unit").distinct()
+
+		return render(request, 'learn_unit.html', {
+			"books": books,
+			"words": words
+		})

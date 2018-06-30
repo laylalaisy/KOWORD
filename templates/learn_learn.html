@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
-
-{% block extra_head %}
-    <link rel="stylesheet" href="{% static 'datatables/dataTables.bootstrap.min.css' %}">
-{% endblock %}
 
 {% block content %}
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
             <b>Learn</b>
@@ -20,25 +16,16 @@
         <div class="box-body">
             <table class="table table-responsive" id="wordbook_table">
                 {% for book in books %}
-                <thead>
-                <tr>
-                    <th>
-                        Unit {{ unit }} of Book {{ book.name }} {{request.user.id}}
-                    </th>
-                    <th>
-                        <a class="btn btn-primary" href="{% url 'learn_learned' book.id unit request.user.id %}">Finish Learning</a>
-                    </th> 
-                </tr>
-                <tr>
-                    <th>Word</th>
-                    <th>Meaning</th>
-                </tr>
-                </thead>
                 <tbody>
                     {% for word in words %}
                         <tr>
                             <td>{{ word.word }}</td>
-                            <td>{{ word.meaning }}</td>
+                        </tr>
+                        <tr>
+                            <div id="answer" class="btn-bar">
+                                <a class="btn btn-success" id="btn-familiar">认识</a>
+                                <a class="btn btn-danger" id="btn-unfamiliar">不熟悉</a>
+                            </div>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -47,4 +34,5 @@
         </div>
     </section>
 
+    
 {% endblock %}
