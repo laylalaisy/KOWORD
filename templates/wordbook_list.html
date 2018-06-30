@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load user_info %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'datatables/dataTables.bootstrap.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>
+            单词书
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'index' %}"><i class="fa fa-dashboard"></i> 首页</a>
+            </li>
+            <li class="active">单词书列表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+    {% if request.user.id|is_teacher %}
+        <a class="btn btn-primary" id="btn_new_book">新建单词书</a>
+
+        <!-- 创建班级对话框 -->
+        <div class="modal fade" id="dialog-new-book">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">新建单词书</h4>
+                    </div>
+                    <div class="modal-body margin-bottom">
+
+                        <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">名称</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="description" placeholder="名称" value="自建单词书 {{ request.user }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="confirm_new_book">确定</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+
+    {% endif %}
+    <!--
+        <table class="table table-responsive" id="wordbook_table">
+            <thead>
+            <tr>
+                <th>书名</th>
+                <th>单词最长学习时间</th>
+                <th>单元最长学习时间</th>
+                <th>最多几个单元同时学习</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for book in wordbooks %}
+                    <tr>
+                        <td><a href="{% url 'learn.book_detail' book.id %}">{{ book.description }}</a></td>
+                        <td>{{ book.max_word_learn_time }}</td>
+                        <td>{{ book.max_unit_learn_time }}</td>
+                        <td>{{ book.max_working_units }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <td>书名</td>
+                <td>单词最长学习时间</td>
+                <td>单元最长学习时间</td>
+                <td>最多几个单元同时学习</td>
+            </tfoot>
+        </table>
+-->
+        <ul id="book-tree"></ul>
+    </section>
+
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{% static 'datatables/jquery.dataTables.min.js' %}" ></script>
+    <script src="{% static 'datatables/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.toaster/jquery.toaster.js' %}"></script>
+
+    <script>
+    $(function() {
+        /*
+        $("#wordbook_table").DataTable({
+            "language": {
+                url: "{% static 'datatables/Chinese.txt' %}"
+            },
+            "pageLength": 50
+        });
+        */
+
+        // treeview implementation copied from https://bootsnipp.com/snippets/featured/bootstrap-30-treeview
+        $.fn.extend({
+            treed: function (o) {
+
+              var openedClass = 'glyphicon-minus-sign';
+              var closedClass = 'glyphicon-plus-sign';
+
+              if (typeof o != 'undefined'){
+                if (typeof o.openedClass != 'undefined'){
+                openedClass = o.openedClass;
+                }
+                if (typeof o.closedClass != 'undefined'){
+                closedClass = o.closedClass;
+                }
+              };
+
+                //initialize each of the top levels
+                var tree = $(this);
+                tree.addClass("tree");
+                tree.find('li').has("ul").each(function () {
+                    var branch = $(this); //li with children ul
+                    branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+                    branch.addClass('branch');
+                    branch.on('click', function (e) {
+                        if (this == e.target) {
+                            var icon = $(this).children('i:first');
+                            icon.toggleClass(openedClass + " " + closedClass);
+                            $(this).children().children().toggle();
+                        }
+                    })
+                    branch.children().children().toggle();
+                });
+                //fire event from the dynamically added icon
+              tree.find('.branch .indicator').each(function(){
+                $(this).on('click', function () {
+                    $(this).closest('li').click();
+                });
+              });
+                //fire event to open branch if the li contains an anchor instead of text
+                tree.find('.branch>a').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+                //fire event to open branch if the li contains a button instead of text
+                tree.find('.branch>button').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+            }
+        });
+
+        // get book tree
+        $.get("{% url 'learn.ajax_book_tree' %}", function(data) {
+            if (data.status == "ok") {
+                function show_tree(title, tree) {
+                    if (typeof(tree) == "object") {
+                        if (tree.hasOwnProperty(("description"))) {
+                            // this is the leaf node
+                            return $("<li>").append($("<a>")
+                                .attr("href", "{% url 'learn.book_detail' 0 %}".replace("0", tree.id))
+                                .html(tree.description));
+                        } else {
+                            var ul = $("<ul>");
+                            for (var child in tree) {
+                                var child_tree = show_tree(child, tree[child]);
+                                if (child_tree != null)
+                                    ul.append(child_tree);
+                            }
+                            return $("<li>").html(title).append(ul);
+                        }
+                        return null;
+                    }
+                }
+                var tree = show_tree("所有单词书", data.books);
+                $("#book-tree").append(tree).treed();
+            }
+        });
+
+        $("#btn_new_book").click(function() {
+            $("#dialog-new-book").modal();
+        });
+
+        $("#confirm_new_book").click(function() {
+            // ajax
+            var url = "{% url 'learn.ajax_new_book' %}";
+            $.ajax({
+                type: "POST",
+                url: url,
+                beforeSend:function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                async: true,
+                data: {
+                    "description": $("#description").val()
+                },
+                success: function(data) {
+                    try {
+                        console.log(data);
+                        if (data.status == "ok") {
+                            console.log("Good");
+                            $("#dialog-new-book").modal('toggle');
+                            var target = "{% url 'learn.book_detail' 0 %}".replace("0", data.book_id);
+                            window.location = target;
+                        } else {
+                            $.toaster({"priority": "warning", "title": "失败了", "message": data.reason});
+                        }
+                    } catch (ex) {
+
+                        console.log(ex);
+                    }
+                }
+            });
+        });
+    });
+    </script>
+{% endblock %}
