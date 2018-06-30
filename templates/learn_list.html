@@ -27,7 +27,7 @@
                 {% for book in books %}
                     <tr>
                         <td>{{ book.name }}</td>
-                        <td><a class="btn btn-primary" href="{% url 'user_login' %}">Learn Now</a>
+                        <td><a class="btn btn-primary" href="{% url 'learn_unitlist' book.id %}">{{info}}</a></td> 
                     </tr>
                 {% endfor %}
             </tbody>
@@ -35,6 +35,3 @@
     </section>
 
 {% endblock %}
-
-
-
