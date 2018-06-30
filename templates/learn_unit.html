@@ -11,7 +11,7 @@
             <b>Learn</b>
         </h1>
         <h5>
-            Choose book now!
+            Choose unit now!
         </h5>
     </section>
 
@@ -20,13 +20,13 @@
         <table class="table table-responsive" id="wordbook_table">
             <thead>
             <tr>
-                <th>Book Name</th>
+                <th>Units</th>
             </tr>
             </thead>
             <tbody>
                 {% for word in words %}
                     <tr>
-                        <td>{{ word.word }}</td> 
+                        <td>{{ word.unit }}</td> 
                     </tr>
                 {% endfor %}
             </tbody>
