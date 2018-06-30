@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import LearnBookListView, LearnUnitListView, LearnWordListView
+from .views import LearnBookListView, LearnUnitListView, LearnWordListView, LearnWordView
 
 urlpatterns = [
     url(r'^booklist/$', LearnBookListView.as_view(), name='learn_booklist'),
     url(r'^unitlist/(?P<book_id>\d+)$', LearnUnitListView.as_view(), name='learn_unitlist'),
     url(r'^wordlist/(?P<book_id>\d+)/(?P<word_unit>\d+)$', LearnWordListView.as_view(), name='learn_wordlist'),
+    url(r'^wordlearn/(?P<book_id>\d+)/(?P<word_unit>\d+)/(?P<user_id>\d+)$', LearnWordView.as_view(), name='learn_wordlearn'),
 ]

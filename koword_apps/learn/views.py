@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http40
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
+from users.models import UserProfile
 from books.models import List
 from .models import Word
 
@@ -34,7 +35,16 @@ class LearnUnitListView(View):
 
 class LearnWordListView(View):
 	def get(self, request, book_id, word_unit):
+		books = List.objects.filter(id=book_id)
+		bookname = List.objects.filter(id=book_id).values("name")
+		words = Word.objects.filter(bookname=bookname, unit=word_unit)
 
-		return render(request, 'user_login.html', {
+		return render(request, 'learn_word.html', {
+			"books": books,
+			"unit": word_unit,
+			"words": words
 		})
 
+class LearnWordView(View):
+	def get(self, request, book_id, word_unit, user_id):
+		return render(request, 'user_login.html', {})
