@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'datatables/dataTables.bootstrap.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>
+            <b>Review</b>
+        </h1>
+        <h5>
+            Choose book now!
+        </h5>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <table class="table table-responsive" id="wordbook_table">
+            <thead>
+            <tr>
+                <th>Book Name</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'review_unitlist' book.id %}">Review Now</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

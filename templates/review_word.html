@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'datatables/dataTables.bootstrap.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>
+            <b>Review</b>
+        </h1>
+        <h5>
+            Start to learn now!
+        </h5>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <div class="box-body">
+            <table class="table table-responsive" id="wordbook_table">
+                {% for book in books %}
+                <thead>
+                <tr>
+                    <th>
+                        Unit {{ unit }} of Book {{ book.name }} {{request.user.id}}
+                    </th>
+                    <th>
+                        <a class="btn btn-primary" href="{% url 'review_traverse' book.id unit request.user.id %}">FinishReviewing</a>
+                    </th> 
+                </tr>
+                <tr>
+                    <th>Word</th>
+                    <th>Meaning</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for word in words %}
+                        <tr>
+                            <td>{{ word.word }}</td>
+                            <td>{{ word.meaning }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+{% endblock %}

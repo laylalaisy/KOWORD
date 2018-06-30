@@ -14,16 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.conf.urls import include
-from django.conf import settings
 
-from users.views import LoginView, RegisterView
+from .views import ReviewBookListView, ReviewUnitListView, ReviewWordListView, ReviewFinishView
 
 urlpatterns = [
-    url(r'^login/$', LoginView.as_view(), name='user_login'),
-    url(r'^register/$', RegisterView.as_view(), name='user_register'),
-    url(r'^users/', include('users.urls')),
-    url(r'^books/', include('books.urls')),
-    url(r'^learn/', include('learn.urls')),
-    url(r'^review/', include('review.urls')),
+    url(r'^booklist/$', ReviewBookListView.as_view(), name='review_booklist'),
+    url(r'^unitlist/(?P<book_id>\d+)$', ReviewUnitListView.as_view(), name='review_unitlist'),
+    url(r'^wordlist/(?P<book_id>\d+)/(?P<word_unit>\d+)$', ReviewWordListView.as_view(), name='review_wordlist'),
+    url(r'^traverse/(?P<book_id>\d+)/(?P<word_unit>\d+)/(?P<user_id>\d+)$', ReviewFinishView.as_view(), name='review_traverse'),
 ]
