@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
 from books.models import List
+from .models import Word
 
 class LearnBookListView(View):
     def get(self, request):
@@ -22,5 +23,7 @@ class LearnBookListView(View):
 
 class LearnUnitListView(View):
 	def get(self, request, book_id):		
-		return render(request, 'user_login.html', {})
+		return render(request, 'learn_unit.html', {})
+
+
 

@@ -7,14 +7,15 @@ from django.db.models import Q
 
 from users.models import UserProfile
 
-class List(models.Model):
-    name = models.CharField(blank=True, max_length=200, verbose_name="name")
+class Word(models.Model):
+    id = models.IntegerField(blank=True, primary_key=True, verbose_name="id")
+    bookname = models.CharField(blank=True, max_length=50, verbose_name="bookname")
     unit = models.IntegerField(verbose_name='unit')
-    author = models.CharField(blank=True, max_length=200, verbose_name="author")
-    info = models.CharField(blank=True, max_length=200, verbose_name="info")
+    word = models.CharField(blank=True, max_length=50, verbose_name="word")
+    meaning = models.CharField(blank=True, max_length=50, verbose_name="meaning")
 
     class Meta:
-        verbose_name = "books_list"
+        verbose_name = "learn_word"
         verbose_name_plural = verbose_name
 
     def __str__(self):
