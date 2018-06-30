@@ -18,22 +18,22 @@
     <!-- Main content -->
     <section class="content container-fluid">
         <table class="table table-responsive" id="wordbook_table">
+            {% for book in books %}
             <thead>
             <tr>
-                {% for book in books %}
                 <th>
                     Units of Book {{ book.name }}
-                </th>
-                {% endfor %}
+                </th> 
             </tr>
             </thead>
             <tbody>
                 {% for word in words %}
                     <tr>
-                        <td>{{ word.unit }}</td> 
+                        <td><a class="btn btn-primary" href="{% url 'learn_wordlist' book.id word.unit %}">{{ word.unit }}</td> 
                     </tr>
                 {% endfor %}
             </tbody>
+            {% endfor %}
         </table>
     </section>
 

@@ -32,3 +32,9 @@ class LearnUnitListView(View):
 			"words": words
 		})
 
+class LearnWordListView(View):
+	def get(self, request, book_id, word_unit):
+
+		return render(request, 'user_login.html', {
+		})
+
