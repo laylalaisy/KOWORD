@@ -5,8 +5,6 @@ from datetime import datetime
 from django.db import models
 from django.db.models import Q
 
-from users.models import UserProfile
-
 class Word(models.Model):
     id = models.IntegerField(blank=True, primary_key=True, verbose_name="id")
     bookname = models.CharField(blank=True, max_length=50, verbose_name="bookname")

@@ -20,7 +20,11 @@
         <table class="table table-responsive" id="wordbook_table">
             <thead>
             <tr>
-                <th>Units</th>
+                {% for book in books %}
+                <th>
+                    Units of Book {{ book.name }}
+                </th>
+                {% endfor %}
             </tr>
             </thead>
             <tbody>
