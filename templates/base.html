@@ -36,11 +36,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <div class="wrapper">
 
-        {% block header_bar %}
+        {% block head %}
             {% include 'base_head.html' %}
         {% endblock %}
 
-        
+        {% block side_bar %}
+            {% include 'base_sidebar.html' %}
+        {% endblock %}
+
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+
 
 </body>
 
