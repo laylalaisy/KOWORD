@@ -28,6 +28,7 @@ class Record(models.Model):
     bookid = models.IntegerField(blank=True, verbose_name="bookid")
     unit = models.IntegerField(blank=True, verbose_name="unit")
     islearned = models.IntegerField(verbose_name="islearned", default=0)
+    learntime = models.DateTimeField(default=datetime.now, verbose_name="learntime")
 
     class Meta:
         verbose_name = "learn_record"

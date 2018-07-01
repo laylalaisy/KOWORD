@@ -10,6 +10,7 @@ class Record(models.Model):
     bookid = models.IntegerField(blank=True, verbose_name="bookid")
     unit = models.IntegerField(blank=True, verbose_name="unit")
     isreviewed = models.IntegerField(verbose_name="isreviewed", default=0)
+    reviewtime = models.DateTimeField(default=datetime.now, verbose_name="reviewtime")
 
     class Meta:
         verbose_name = "review_record"

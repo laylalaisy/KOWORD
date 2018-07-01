@@ -7,9 +7,13 @@
 {% endblock %}
 
 {% block content %}
+    <section class="content-header">
+        <h1>
+            {{ user }}的学习记录
+        </h1>
+    </section>
 
-
-    <!-- Main content -->
+ <!-- Main content -->
     <section class="content container-fluid">
         <div class="box box-solid bg-teal-gradient">
             <div class="box-header">
@@ -19,6 +23,43 @@
                 <div class="chart" id="line-chart" style="height: 250px;"></div>
             </div>
         </div>
+    </section>
 
+{% endblock %}
 
+{% block extra_script %}
+    <script src="{% static 'datatables/jquery.dataTables.min.js' %}" ></script>
+    <script src="{% static 'datatables/dataTables.bootstrap.min.js' %}"></script>
+
+    <!-- Morris.js charts -->
+    <script src="{% static 'bower_components/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'bower_components/morris.js/morris.min.js' %}"></script>
+
+    <script>
+    $(function() {
+        var line = new Morris.Line({
+            element: 'line-chart',
+            resize: true,
+            data: [
+                {% for item in recent_records %}
+                    {y: '{{item.date}}', item1: {{ item.count }}},
+                {% endfor %}
+            ],
+            xkey: 'y',
+            ykeys: ['item1'],
+            labels: ['Item 1'],
+            lineColors: ['#efefef'],
+            lineWidth: 2,
+            hideHover: 'auto',
+            gridTextColor: '#fff',
+            gridStrokeWidth: 0.4,
+            pointSize: 4,
+            pointStrokeColors: ['#efefef'],
+            gridLineColor: '#efefef',
+            gridTextFamily: 'Open Sans',
+            gridTextSize: 10
+        });
+    });
+
+    </script>
 {% endblock %}

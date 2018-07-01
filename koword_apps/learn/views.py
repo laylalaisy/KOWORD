@@ -64,5 +64,9 @@ class LearnFinishView(View):
 
 class LearnRecordView(View):
     def get(self, request):
+    	books = List.objects.all()
+
     	return render(request, "learn_records.html", {
+    		"user": request.user,
+    		"books": books
     	})
