@@ -8,36 +8,33 @@
 {% block content %}
     <section class="content-header">
         <h1>
-            Learn Record
+            <b>Exam</b>
         </h1>
+        <h5>
+            Choose unit now!
+        </h5>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
         <table class="table table-responsive" id="wordbook_table">
+            {% for book in books %}
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Units</th>
-                <th>Learned Units</th>
-                <th>Not Learned Units</th>
+                <th>
+                    Units of Book {{ book.name }}
+                </th> 
             </tr>
             </thead>
             <tbody>
-                {% for record in records %}
+                {% for word in words %}
                     <tr>
-                        <td>{{ record.bookname }}</td>
-                        <td>{{ record.unit }}</td>                        
-                        <td>{{ record.learned_count }}</td>
-                        <td>{{ record.notlearned_count }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'exam_wordlist' book.id word.unit %}">{{ word.unit }}</td> 
                     </tr>
                 {% endfor %}
             </tbody>
+            {% endfor %}
         </table>
     </section>
 
 {% endblock %}
-
-
-
-  

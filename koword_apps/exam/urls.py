@@ -14,17 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.conf.urls import include
-from django.conf import settings
 
-from users.views import LoginView, RegisterView
+from .views import ExamBookListView, ExamUnitListView, ExamWordListView, ExamFinishView, ExamRecordView
 
 urlpatterns = [
-    url(r'^login/$', LoginView.as_view(), name='user_login'),
-    url(r'^register/$', RegisterView.as_view(), name='user_register'),
-    url(r'^users/', include('users.urls')),
-    url(r'^books/', include('books.urls')),
-    url(r'^learn/', include('learn.urls')),
-    url(r'^review/', include('review.urls')),
-    url(r'^exam/', include('exam.urls')),
+    url(r'^booklist/$', ExamBookListView.as_view(), name='exam_booklist'),
+    url(r'^unitlist/(?P<book_id>\d+)$', ExamUnitListView.as_view(), name='exam_unitlist'),
+    url(r'^wordlist/(?P<book_id>\d+)/(?P<word_unit>\d+)$', ExamWordListView.as_view(), name='exam_wordlist'),
+    url(r'^traverse/(?P<book_id>\d+)/(?P<word_unit>\d+)/(?P<user_id>\d+)$', ExamFinishView.as_view(), name='exam_traverse'),
+    url(r'^record/$', ExamRecordView.as_view(), name='exam_record'),
 ]

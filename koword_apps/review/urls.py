@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import ReviewBookListView, ReviewUnitListView, ReviewWordListView, ReviewFinishView
+from .views import ReviewBookListView, ReviewUnitListView, ReviewWordListView, ReviewFinishView, ReviewRecordView
 
 urlpatterns = [
     url(r'^booklist/$', ReviewBookListView.as_view(), name='review_booklist'),
     url(r'^unitlist/(?P<book_id>\d+)$', ReviewUnitListView.as_view(), name='review_unitlist'),
     url(r'^wordlist/(?P<book_id>\d+)/(?P<word_unit>\d+)$', ReviewWordListView.as_view(), name='review_wordlist'),
     url(r'^traverse/(?P<book_id>\d+)/(?P<word_unit>\d+)/(?P<user_id>\d+)$', ReviewFinishView.as_view(), name='review_traverse'),
+    url(r'^record/$', ReviewRecordView.as_view(), name='review_record'),
 ]

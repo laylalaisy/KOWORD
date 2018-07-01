@@ -8,8 +8,11 @@
 {% block content %}
     <section class="content-header">
         <h1>
-            Learn Record
+            <b>Exam</b>
         </h1>
+        <h5>
+            Choose book now!
+        </h5>
     </section>
 
     <!-- Main content -->
@@ -17,19 +20,14 @@
         <table class="table table-responsive" id="wordbook_table">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Units</th>
-                <th>Learned Units</th>
-                <th>Not Learned Units</th>
+                <th>Book Name</th>
             </tr>
             </thead>
             <tbody>
-                {% for record in records %}
+                {% for book in books %}
                     <tr>
-                        <td>{{ record.bookname }}</td>
-                        <td>{{ record.unit }}</td>                        
-                        <td>{{ record.learned_count }}</td>
-                        <td>{{ record.notlearned_count }}</td>
+                        <td>{{ book.name }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'exam_unitlist' book.id %}">Exam Now</a></td> 
                     </tr>
                 {% endfor %}
             </tbody>
@@ -37,7 +35,3 @@
     </section>
 
 {% endblock %}
-
-
-
-  

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'books',
     'learn',
     'review',
+    'exam',
 ]
 
 MIDDLEWARE_CLASSES = [

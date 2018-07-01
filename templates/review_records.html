@@ -8,7 +8,7 @@
 {% block content %}
     <section class="content-header">
         <h1>
-            Learn Record
+            Review Record
         </h1>
     </section>
 
@@ -19,8 +19,8 @@
             <tr>
                 <th>Name</th>
                 <th>Units</th>
-                <th>Learned Units</th>
-                <th>Not Learned Units</th>
+                <th>Reviewed Units</th>
+                <th>Not Reviewed Units</th>
             </tr>
             </thead>
             <tbody>
@@ -28,8 +28,8 @@
                     <tr>
                         <td>{{ record.bookname }}</td>
                         <td>{{ record.unit }}</td>                        
-                        <td>{{ record.learned_count }}</td>
-                        <td>{{ record.notlearned_count }}</td>
+                        <td>{{ record.reviewed_count }}</td>
+                        <td>{{ record.notreviewed_count }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

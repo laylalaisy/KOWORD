@@ -14,70 +14,70 @@ from books.models import List
 from learn.models import Word
 from .models import Record
 
-class ReviewBookListView(View):
+class ExamBookListView(View):
     def get(self, request):
     	books = List.objects.all()
 
-    	return render(request, "review_list.html", {
+    	return render(request, "exam_list.html", {
     		"books": books
     	})
 
 
-class ReviewUnitListView(View):
+class ExamUnitListView(View):
 	def get(self, request, book_id):
 		books = List.objects.filter(id=book_id)
 		bookname = List.objects.filter(id=book_id).values("name")
 		words = Word.objects.filter(bookname=bookname).values("unit").distinct()
 
-		return render(request, 'review_unit.html', {
+		return render(request, 'exam_unit.html', {
 			"books": books,
 			"words": words
 		})
 
-class ReviewWordListView(View):
+class ExamWordListView(View):
 	def get(self, request, book_id, word_unit):
 		books = List.objects.filter(id=book_id)
 		bookname = List.objects.filter(id=book_id).values("name")
 		words = Word.objects.filter(bookname=bookname, unit=word_unit)
 
-		return render(request, 'review_word.html', {
+		return render(request, 'exam_word.html', {
 			"books": books,
 			"unit": word_unit,
 			"words": words
 		})
 
-class ReviewFinishView(View):
+class ExamFinishView(View):
 	def get(self, request, book_id, word_unit, user_id):
 
-		review_record = Record()
-		review_record.isreviewed = 1
-		review_record.userid = user_id
-		review_record.bookid = book_id
-		review_record.unit = word_unit
-		review_record.save()
+		exam_record = Record()
+		exam_record.isexamed = 1
+		exam_record.userid = user_id
+		exam_record.bookid = book_id
+		exam_record.unit = word_unit
+		exam_record.save()
 
 		books = List.objects.all()
 
-		return render(request, "review_list.html", {
+		return render(request, "exam_list.html", {
 			"books": books
 		})
 
-class ReviewRecordView(View):
+class ExamRecordView(View):
     def get(self, request):
     	books = List.objects.all()
     	records = Record.objects.filter(userid=request.user.id)
 
     	results = []
     	for book in books:
-    		reviewed_count = Record.objects.filter(userid=request.user.id, bookid=book.id, isreviewed=1).count()
+    		examed_count = Record.objects.filter(userid=request.user.id, bookid=book.id, isexamed=1).count()
     		results.append({
     			"bookname": book.name,
     			"unit": book.unit,
-    			"reviewed_count": reviewed_count,
-    			"notreviewed_count": book.unit - reviewed_count
+    			"examed_count": examwed_count,
+    			"notexamed_count": book.unit - examed_count
     			})
 
-    	return render(request, "review_records.html", {
+    	return render(request, "exam_records.html", {
     		"books": books,
     		"records": results
     	})
