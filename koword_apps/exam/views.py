@@ -48,18 +48,14 @@ class ExamWordListView(View):
 
 class ExamFinishView(View):
 	def get(self, request, book_id, word_unit, user_id):
+		books = List.objects.filter(id=book_id)
+		bookname = List.objects.filter(id=book_id).values("name")
+		words = Word.objects.filter(bookname=bookname, unit=word_unit)
 
-		exam_record = Record()
-		exam_record.isexamed = 1
-		exam_record.userid = user_id
-		exam_record.bookid = book_id
-		exam_record.unit = word_unit
-		exam_record.save()
-
-		books = List.objects.all()
-
-		return render(request, "exam_list.html", {
-			"books": books
+		return render(request, "exam_answer.html", {
+			"books": books,
+			"unit": word_unit,
+			"words": words
 		})
 
 class ExamRecordView(View):

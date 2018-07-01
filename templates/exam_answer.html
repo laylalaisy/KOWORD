@@ -26,29 +26,19 @@
                         Unit {{ unit }} of Book {{ book.name }} {{request.user.id}}
                     </th>
                     <th>
-                        <a class="btn btn-primary" href="{% url 'exam_traverse' book.id unit request.user.id %}">See Answers Now</a>
+                        <a class="btn btn-primary" href="{% url 'exam_booklist' %}">Exam Another Unit</a>
                     </th> 
                 </tr>
                 <tr>
                     <th>Word</th>
-                    <th>Know</th>
-                    <th>Dont Know</th>
+                    <th>Answer</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for word in words %}
                         <tr>
                             <td>{{ word.word }}</td>
-                            <td>
-                                <div id="answer" class="btn-bar">
-                                    <a class="btn btn-success" id="btn-familiar">Know</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div id="answer" class="btn-bar">
-                                    <a class="btn btn-danger" id="btn-familiar">Dont Know</a>
-                                </div>
-                            </td>
+                            <td>{{ word.meaning }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
