@@ -65,8 +65,19 @@ class LearnFinishView(View):
 class LearnRecordView(View):
     def get(self, request):
     	books = List.objects.all()
+    	records = Record.objects.filter(userid=request.user.id)
+
+    	results = []
+    	for book in books:
+    		learned_count = Record.objects.filter(userid=request.user.id, bookid=book.id, islearned=1).count()
+    		results.append({
+    			"bookname": book.name,
+    			"unit": book.unit,
+    			"learned_count": learned_count,
+    			"notlearned_count": book.unit - learned_count
+    			})
 
     	return render(request, "learn_records.html", {
-    		"user": request.user,
-    		"books": books
+    		"books": books,
+    		"records": results
     	})
