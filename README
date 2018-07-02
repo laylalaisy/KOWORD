@@ -1,9 +1,6 @@
 # KOWORD 使用手册 
 
 
-
-[TOC]
-
 ### 1 项目简介
 这是一个基于Django + JS +Sqlite3 + Python的背单词网站。主要功能包括：
 - 用户注册与登录
