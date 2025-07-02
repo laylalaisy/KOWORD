@@ -69,5 +69,6 @@ python manage.py runserver
 	- password: 123456
 - 首次登录的时候注册账号
 
+test
 
 
